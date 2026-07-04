@@ -5,7 +5,7 @@ import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import OptionCard from "@/components/interview/OptionCard";
 import SetupProgress from "@/components/interview/SetupProgress";
 import AIInitialization from "@/components/interview/AIInitialization";
-
+import { COMPANY_MODES } from "@/constants/companyModes";
 import {
   ROLES,
   DIFFICULTIES,
@@ -16,7 +16,7 @@ export default function InterviewSetupPage() {
   const [role, setRole] = useState(ROLES[0].title);
   const [difficulty, setDifficulty] = useState(DIFFICULTIES[1]);
   const [duration, setDuration] = useState(DURATIONS[1]);
-
+  const [company, setCompany] = useState("Generic");
   const estimatedQuestions = useMemo(() => {
     switch (duration) {
       case "15 min":

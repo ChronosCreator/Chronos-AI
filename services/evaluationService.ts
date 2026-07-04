@@ -19,9 +19,13 @@ export async function evaluateInterview(
     }),
   });
 
-  if (!response.ok) {
-    throw new Error("Evaluation failed");
-  }
+ if (!response.ok) {
+  const data = await response.json();
+
+  throw new Error(
+    data.error || "Evaluation failed"
+  );
+}
 
   return await response.json();
 }

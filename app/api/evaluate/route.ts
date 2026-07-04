@@ -47,8 +47,24 @@ No markdown.
 Only JSON.
 `;
 
-    const result = await model.generateContent(prompt);
+    let result;
 
+for (let i = 0; i < 3; i++) {
+  try {
+    result = await model.generateContent(prompt);
+    break;
+  } catch (error) {
+    if (i === 2) throw error;
+
+    await new Promise((resolve) =>
+      setTimeout(resolve, 2000)
+    );
+  }
+}
+
+if (!result) {
+  throw new Error("Gemini unavailable");
+}
     const text = result.response.text();
 
     return NextResponse.json({
@@ -56,15 +72,18 @@ Only JSON.
     });
 
   } catch (error) {
-    console.error(error);
+  console.error("Gemini Error:", error);
 
-    return NextResponse.json(
-      {
-        error: "Evaluation failed",
-      },
-      {
-        status: 500,
-      }
-    );
-  }
+  return NextResponse.json(
+    {
+      error:
+        error instanceof Error
+          ? error.message
+          : "Unknown error",
+    },
+    {
+      status: 500,
+    }
+  );
+}
 }
