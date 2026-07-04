@@ -5,7 +5,7 @@ import { CheckCircle2, RotateCcw, Home } from "lucide-react";
 import { InterviewResult } from "@/types/interview";
 import { useEffect, useState } from "react";
 import { getUserInterviews } from "@/services/dashboard";
-
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
 export default function InterviewResultsPage() {
 
     const [latestInterview, setLatestInterview] =
@@ -24,6 +24,7 @@ useEffect(() => {
 }, []);
 
   return (
+     <ProtectedRoute>
     <main className="min-h-screen bg-black px-6 py-20 text-white">
 
       <div className="mx-auto max-w-6xl">
@@ -194,5 +195,6 @@ useEffect(() => {
       </div>
 
     </main>
+     </ProtectedRoute>
   );
 }

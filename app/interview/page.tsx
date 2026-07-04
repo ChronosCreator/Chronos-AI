@@ -2,7 +2,7 @@
 
 import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import {
   InterviewSessionProvider,
 } from "@/contexts/InterviewSessionContext";
@@ -47,6 +47,7 @@ function InterviewContent() {
   } = useAIState();
 
   return (
+    
     <main className="min-h-screen bg-black px-8 py-24 text-white">
       <div className="mx-auto mb-10 flex max-w-7xl items-center justify-between rounded-2xl border border-cyan-500/20 bg-white/5 p-6 backdrop-blur-xl">
         <div>
@@ -85,6 +86,7 @@ function InterviewContent() {
         history={history}
       />
     </main>
+    
   );
 }
 
@@ -102,6 +104,7 @@ function InterviewPageContent() {
 
 export default function InterviewPage() {
   return (
+     <ProtectedRoute>
     <Suspense
       fallback={
         <main className="min-h-screen flex items-center justify-center bg-black text-white">
@@ -111,5 +114,6 @@ export default function InterviewPage() {
     >
       <InterviewPageContent />
     </Suspense>
+    </ProtectedRoute>
   );
 }

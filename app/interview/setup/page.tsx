@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import OptionCard from "@/components/interview/OptionCard";
 import SetupProgress from "@/components/interview/SetupProgress";
 import AIInitialization from "@/components/interview/AIInitialization";
@@ -31,6 +31,7 @@ export default function InterviewSetupPage() {
   }, [duration]);
 
   return (
+    <ProtectedRoute>
     <main className="min-h-screen bg-black px-8 py-24 text-white">
       <div className="mx-auto max-w-7xl">
 
@@ -128,5 +129,6 @@ export default function InterviewSetupPage() {
 
       </div>
     </main>
+    </ProtectedRoute>
   );
 }
