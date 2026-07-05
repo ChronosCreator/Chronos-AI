@@ -1,18 +1,10 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { groq } from "@/lib/groq";
 import { NextResponse } from "next/server";
-
-const genAI = new GoogleGenerativeAI(
-  process.env.GEMINI_API_KEY!
-);
 
 export async function POST(req: Request) {
   try {
     const { question, answer, role, difficulty } =
       await req.json();
-
-    const model = genAI.getGenerativeModel({
-      model: "gemini-2.5-flash",
-    });
 
     const prompt = `
 You are a Senior FAANG interviewer.
@@ -47,43 +39,38 @@ No markdown.
 Only JSON.
 `;
 
-    let result;
+    const completion =
+      await groq.chat.completions.create({
+        model: "llama-3.3-70b-versatile",
+        temperature: 0.7,
+        messages: [
+          {
+            role: "user",
+            content: prompt,
+          },
+        ],
+      });
 
-for (let i = 0; i < 3; i++) {
-  try {
-    result = await model.generateContent(prompt);
-    break;
-  } catch (error) {
-    if (i === 2) throw error;
-
-    await new Promise((resolve) =>
-      setTimeout(resolve, 2000)
-    );
-  }
-}
-
-if (!result) {
-  throw new Error("Gemini unavailable");
-}
-    const text = result.response.text();
+    const text =
+      completion.choices[0]?.message?.content ?? "";
 
     return NextResponse.json({
       response: text,
     });
 
   } catch (error) {
-  console.error("Gemini Error:", error);
+    console.error("Groq Error:", error);
 
-  return NextResponse.json(
-    {
-      error:
-        error instanceof Error
-          ? error.message
-          : "Unknown error",
-    },
-    {
-      status: 500,
-    }
-  );
-}
+    return NextResponse.json(
+      {
+        error:
+          error instanceof Error
+            ? error.message
+            : "Unknown error",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
 }
