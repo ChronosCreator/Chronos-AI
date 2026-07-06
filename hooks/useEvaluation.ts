@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-
+import { toast } from "sonner";
 import { evaluateInterview } from "@/services/evaluationService";
 import { EvaluationResult } from "@/types/evaluation";
 
@@ -11,36 +11,49 @@ export default function useEvaluation() {
     useState<EvaluationResult | null>(null);
 
   const evaluate = async (
-  question: string,
-  answer: string,
-  role: string,
-  difficulty: string
-) => {
+    question: string,
+    answer: string,
+    role: string,
+    difficulty: string
+  ) => {
+    const toastId = toast.loading(
+      "Chronos AI is evaluating your answer..."
+    );
+
     setLoading(true);
 
     try {
       const response = await evaluateInterview(
-  question,
-  answer,
-  role,
-  difficulty
-);
+        question,
+        answer,
+        role,
+        difficulty
+      );
 
-      // Handle Gemini response safely
-      const cleanedResponse = response.response
-        .replace(/```json/g, "")
-        .replace(/```/g, "")
-        .trim();
+      // If your API returns { response: "..." }, parse it.
+      // If evaluateInterview already returns EvaluationResult,
+      // replace this with: setResult(response);
 
       const parsed: EvaluationResult =
-        JSON.parse(cleanedResponse);
+        typeof response.response === "string"
+          ? JSON.parse(response.response)
+          : response;
 
       setResult(parsed);
 
+      toast.success("Evaluation completed!", {
+        id: toastId,
+      });
+
       return parsed;
     } catch (error) {
-      console.error("Evaluation failed:", error);
-      return null;
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong."
+      );
+
+      throw error;
     } finally {
       setLoading(false);
     }

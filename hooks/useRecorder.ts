@@ -8,12 +8,24 @@ const [stream, setStream] = useState<MediaStream | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const mediaRecorder = useRef<MediaRecorder | null>(null);
   const chunks = useRef<Blob[]>([]);
-
+const [permissionDenied, setPermissionDenied] =
+  useState(false);
   const startRecording = async () => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        audio: true,
-      });
+     let stream: MediaStream;
+
+try {
+  stream =
+    await navigator.mediaDevices.getUserMedia({
+      audio: true,
+    });
+
+  setPermissionDenied(false);
+
+} catch {
+  setPermissionDenied(true);
+  return;
+}
 
       streamRef.current = stream;
       setStream(stream);
@@ -54,10 +66,11 @@ const [stream, setStream] = useState<MediaStream | null>(null);
   };
 
   return {
-    isRecording,
-    audioURL,
-    stream,
-    startRecording,
-    stopRecording,
-  };
+  isRecording,
+  audioURL,
+  stream,
+  permissionDenied,
+  startRecording,
+  stopRecording,
+};
 }

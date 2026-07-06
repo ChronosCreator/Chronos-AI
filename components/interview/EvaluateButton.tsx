@@ -1,6 +1,8 @@
 "use client";
 
-type Props = {
+import { Loader2, Sparkles } from "lucide-react";
+
+type EvaluateButtonProps = {
   loading: boolean;
   onClick: () => void;
 };
@@ -8,16 +10,48 @@ type Props = {
 export default function EvaluateButton({
   loading,
   onClick,
-}: Props) {
+}: EvaluateButtonProps) {
   return (
     <button
-      onClick={onClick}
       disabled={loading}
-      className="rounded-2xl bg-gradient-to-r from-cyan-400 to-blue-500 px-8 py-3 font-semibold text-white transition hover:scale-105 disabled:cursor-not-allowed disabled:opacity-50"
+      onClick={onClick}
+      className="
+        flex
+        w-full
+        items-center
+        justify-center
+        gap-3
+        rounded-2xl
+        bg-gradient-to-r
+        from-cyan-500
+        to-blue-600
+        px-6
+        py-4
+        font-semibold
+        text-white
+        transition
+        duration-300
+        hover:scale-[1.02]
+        disabled:cursor-not-allowed
+        disabled:opacity-60
+      "
     >
-      {loading
-        ? "Chronos AI Thinking..."
-        : "Evaluate Answer"}
+      {loading ? (
+        <>
+          <Loader2
+            size={20}
+            className="animate-spin"
+          />
+
+          AI is evaluating...
+        </>
+      ) : (
+        <>
+          <Sparkles size={20} />
+
+          Evaluate Answer
+        </>
+      )}
     </button>
   );
 }

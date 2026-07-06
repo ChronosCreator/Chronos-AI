@@ -1,7 +1,7 @@
 "use client";
 
 import { Mic, Square } from "lucide-react";
-
+import MicrophonePermission from "./MicrophonePermission";
 import CandidateAvatar from "./CandidateAvatar";
 import InterviewTimer from "./InterviewTimer";
 import Waveform from "./Waveform";
@@ -16,6 +16,7 @@ export default function CandidatePanel() {
   isRecording,
   audioURL,
   stream,
+  permissionDenied,
   startRecording,
   stopRecording,
 } = useRecorder();
@@ -43,6 +44,7 @@ useEffect(() => {
   stopRecording();
   stopListening();
 };
+
 
   return (
     <div className="h-full rounded-2xl border border-white/10 bg-white/5 p-6">
@@ -104,9 +106,19 @@ useEffect(() => {
 />
       </div>
 
-      {/* Controls */}
+    
 
-      <div className="mt-10 flex justify-center">
+     {/* Permission */}
+
+{permissionDenied && (
+  <MicrophonePermission
+    onRetry={handleStart}
+  />
+)}
+
+{/* Controls */}
+
+<div className="mt-10 flex justify-center">
 
         {isRecording ? (
 
@@ -121,9 +133,25 @@ useEffect(() => {
         ) : (
 
           <button
-            onClick={handleStart}
-            className="flex items-center gap-3 rounded-2xl bg-gradient-to-r from-cyan-400 to-blue-500 px-6 py-3 font-semibold transition hover:scale-105"
-          >
+  onClick={handleStart}
+  disabled={permissionDenied}
+  className="
+    flex
+    items-center
+    gap-3
+    rounded-2xl
+    bg-gradient-to-r
+    from-cyan-400
+    to-blue-500
+    px-6
+    py-3
+    font-semibold
+    transition
+    hover:scale-105
+    disabled:cursor-not-allowed
+    disabled:opacity-50
+  "
+>
             <Mic size={18} />
             Start Recording
           </button>
