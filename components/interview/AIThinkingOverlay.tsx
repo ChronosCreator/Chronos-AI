@@ -18,30 +18,29 @@ const STEPS = [
 export default function AIThinkingOverlay({
   open,
 }: Props) {
-  const [step, setStep] = useState(0);
+ const [step, setStep] = useState(() =>
+  open ? 0 : -1
+);
 
   useEffect(() => {
-    if (!open) {
-      setStep(0);
-      return;
-    }
+  if (!open) return;
 
-    const interval = setInterval(() => {
-      setStep((prev) => {
-        if (prev >= STEPS.length - 1) {
-          return prev;
-        }
+  const interval = setInterval(() => {
+    setStep((prev) => {
+      if (prev < 0) return 0;
+      return prev >= STEPS.length - 1
+        ? prev
+        : prev + 1;
+    });
+  }, 1000);
 
-        return prev + 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [open]);
-
+  return () => {
+    clearInterval(interval);
+  };
+}, [open]);
   return (
     <AnimatePresence>
-      {open && (
+     {open && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -101,12 +100,12 @@ export default function AIThinkingOverlay({
                   key={item}
                   className="flex items-center gap-4"
                 >
-                  {index < step ? (
+                  {step >= 0 && index < step ? (
                     <CheckCircle2
                       className="text-green-400"
                       size={20}
                     />
-                  ) : index === step ? (
+                  ) : step >= 0 && index === step ? (
                     <Loader2
                       className="animate-spin text-cyan-400"
                       size={20}
@@ -117,7 +116,7 @@ export default function AIThinkingOverlay({
 
                   <span
                     className={`${
-                      index <= step
+                     step >= 0 && index <= step
                         ? "text-white"
                         : "text-slate-500"
                     }`}

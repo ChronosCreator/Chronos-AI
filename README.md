@@ -1,108 +1,26 @@
-<div align="center">
-
 # 🚀 Chronos AI
 
-### AI-Powered Interview Preparation Platform
-
-Practice technical interviews, receive instant AI feedback, and improve your interview performance with Gemini AI.
-
-![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js)
-![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript)
-![TailwindCSS](https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=tailwindcss)
-![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase)
-![Gemini_AI](https://img.shields.io/badge/Gemini-AI-4285F4?style=for-the-badge)
-
-</div>
+An AI-powered mock interview platform that helps developers prepare for technical interviews through real-time voice interaction, AI evaluation, and instant feedback.
 
 ---
 
-# ✨ Features
+## ✨ Features
 
-- 🤖 AI-powered interview evaluation using Gemini AI
-- 🎤 Speech Recognition
-- 🎙️ Voice Recording
-- 🔐 Google Authentication
-- ☁️ Supabase Cloud Database
-- 📊 AI-generated interview feedback
-- 📝 Dynamic interview questions
-- ⚡ Modern glassmorphism UI
-- 🌌 Beautiful animations using Framer Motion
-- 📱 Responsive design
-
----
-
-# 📸 Screenshots
-
-## 🏠 Landing Page
-
-![Landing](public/screenshots/landing.png)
+- 🎙️ Voice-based mock interviews
+- 🤖 AI-powered answer evaluation
+- 💬 Live speech-to-text transcription
+- 📊 Interview progress tracking
+- 📈 Instant feedback & scoring
+- 💾 Auto-save interview sessions
+- 🔒 Authentication with Supabase
+- 📱 Responsive UI
+- 🌐 Modern glassmorphism design
 
 ---
 
-## 🔐 Login
+## 🛠 Tech Stack
 
-![Login](public/screenshots/login.png)
-
----
-
-## ⚙️ Interview Setup
-
-![Setup](public/screenshots/setup.png)
-
----
-
-## 🎤 Live Interview
-
-![Interview](public/screenshots/interview.png)
-
----
-
-## 📈 Results
-
-![Results](public/screenshots/results.png)
-
----
-
-# 🏗️ Architecture
-
-```
-                    User
-
-                      │
-
-        Google Authentication
-
-                      │
-
-                Supabase Auth
-
-                      │
-
-      Interview Configuration
-
-                      │
-
-           Gemini AI API
-
-                      │
-
-      AI Evaluation + Feedback
-
-                      │
-
-      Supabase Database Storage
-
-                      │
-
-          Results & Analytics
-```
-
----
-
-# 🛠 Tech Stack
-
-## Frontend
+### Frontend
 
 - Next.js 16
 - React 19
@@ -110,110 +28,69 @@ Practice technical interviews, receive instant AI feedback, and improve your int
 - Tailwind CSS
 - Framer Motion
 
-## Backend
+### Backend
 
-- Next.js Route Handlers
-
-## AI
-
-- Google Gemini AI
-
-## Authentication
-
-- Supabase Auth
-- Google OAuth
-
-## Database
-
+- Next.js API Routes
+- Groq API
 - Supabase
 
----
+### AI
 
-# 📂 Folder Structure
-
-```
-app/
-
-components/
-
-contexts/
-
-hooks/
-
-services/
-
-constants/
-
-lib/
-
-types/
-
-public/
-```
+- Groq LLM
+- Web Speech API
+- MediaRecorder API
 
 ---
 
-# ⚙️ Installation
+## 📸 Screenshots
 
-Clone the repository
+(Add screenshots here after deployment)
+
+Landing Page
+
+Interview Setup
+
+Live Interview
+
+Evaluation
+
+Results
+
+---
+
+## 🚀 Getting Started
 
 ```bash
-git clone https://github.com/ChronosCreator/Chronos-AI.git
-```
+git clone https://github.com/ChronosCreator/Chronos-Ai.git
 
-Go inside the project
+cd Chronos-Ai
 
-```bash
-cd Chronos-AI
-```
-
-Install dependencies
-
-```bash
 npm install
-```
 
-Run the project
-
-```bash
 npm run dev
 ```
 
 ---
 
-# 🔑 Environment Variables
+## Environment Variables
 
-Create a `.env.local`
+Create
+
+```text
+.env.local
+```
 
 ```env
-NEXT_PUBLIC_SUPABASE_URL=
+GROQ_API_KEY=your_key
 
-NEXT_PUBLIC_SUPABASE_ANON_KEY=
+NEXT_PUBLIC_SUPABASE_URL=your_url
 
-GEMINI_API_KEY=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_key
 ```
 
 ---
 
-# 🚀 Future Roadmap
-
-- 📄 Resume Analyzer
-- 🏢 Company-specific Interview Modes
-- 📹 Webcam Confidence Analysis
-- 📊 Analytics Dashboard
-- 📑 PDF Interview Reports
-- 🎯 Adaptive AI Question Difficulty
-- 🌍 Live Deployment
-
----
-
-# 💡 Why Chronos AI?
-
-Chronos AI is designed to simulate real-world technical interviews using AI. Instead of solving isolated coding questions, users experience a complete interview workflow including authentication, interview setup, AI-driven evaluation, speech recognition, and detailed feedback.
-
----
-
-# 👨‍💻 Author
+## 👨‍💻 Author
 
 **Sumit Kumar**
 
@@ -223,18 +100,10 @@ https://github.com/ChronosCreator
 
 LinkedIn
 
-(Add your LinkedIn URL)
+https://www.linkedin.com/in/sumitkumar-java/
 
 ---
 
-# ⭐ Support
+## ⭐ Star the Repository
 
-If you like this project, consider giving it a ⭐ on GitHub!
-
----
-
-<div align="center">
-
-Made with ❤️ using Next.js + Gemini AI
-
-</div>
+If you found this project useful, consider giving it a ⭐.

@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
 export type SavedInterview = {
   currentQuestion: string;
   currentIndex: number;
@@ -11,24 +9,25 @@ export type SavedInterview = {
 };
 
 export default function useInterviewRestore() {
-  const [savedInterview, setSavedInterview] =
-    useState<SavedInterview | null>(null);
+  if (typeof window === "undefined") {
+    return null;
+  }
 
-  useEffect(() => {
-    const saved = localStorage.getItem(
+  const saved = localStorage.getItem(
+    "chronos-interview"
+  );
+
+  if (!saved) {
+    return null;
+  }
+
+  try {
+    return JSON.parse(saved) as SavedInterview;
+  } catch {
+    localStorage.removeItem(
       "chronos-interview"
     );
 
-    if (!saved) return;
-
-    try {
-      setSavedInterview(JSON.parse(saved));
-    } catch {
-      localStorage.removeItem(
-        "chronos-interview"
-      );
-    }
-  }, []);
-
-  return savedInterview;
+    return null;
+  }
 }

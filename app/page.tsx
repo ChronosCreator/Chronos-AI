@@ -32,7 +32,7 @@ export default function Home() {
       Chronos AI is an AI-powered mock interview platform that
       simulates real technical interviews using voice interaction,
       AI evaluation, live transcription, and personalized feedback.
-      Whether you're preparing for internships or software
+      Whether You&apos;re preparing for internships or software
       engineering roles, Chronos AI helps you practice with
       confidence.
     </p>
