@@ -42,22 +42,6 @@ An AI-powered mock interview platform that helps developers prepare for technica
 
 ---
 
-## 📸 Screenshots
-
-(Add screenshots here after deployment)
-
-Landing Page
-
-Interview Setup
-
-Live Interview
-
-Evaluation
-
-Results
-
----
-
 ## 🚀 Getting Started
 
 ```bash
