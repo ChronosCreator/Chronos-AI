@@ -92,7 +92,7 @@ export default function InterviewWorkspace({
         <button
           onClick={onEvaluate}
           disabled={loading}
-          className="rounded-2xl border border-cyan-400 px-8 py-3 text-cyan-300 transition hover:bg-cyan-400/10"
+          className="w-full rounded-2xl border border-cyan-400 px-8 py-3 text-cyan-300 transition hover:bg-cyan-400/10 md:w-auto"
         >
           {loading ? "Evaluating..." : "Evaluate Answer"}
         </button>
@@ -100,7 +100,7 @@ export default function InterviewWorkspace({
         <button
           onClick={onNext}
           disabled={isThinking}
-          className="rounded-2xl bg-gradient-to-r from-cyan-400 to-blue-500 px-8 py-3 font-semibold transition-all hover:scale-105 disabled:opacity-50"
+          className="w-full rounded-2xl bg-gradient-to-r from-cyan-400 to-blue-500 px-8 py-3 font-semibold transition-all hover:scale-105 disabled:opacity-50 md:w-auto"
         >
           Next Question →
         </button>
